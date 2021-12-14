@@ -1,31 +1,60 @@
 const fs = require('fs');
-const fs = require('fs');
-const filepath = path.join(path.dirname(require.main.filename), 'data', 'wishes.json' );
+const path = require('path');
+const filePath = path.join(path.dirname(require.main.filename), 'data', 'wishes.json');
 
 module.exports = class Wish {
     constructor(wish){
         this.description = wish;
     }
 
-
     saveWish(){
-        fs.readFile(filepath, (error, fileContent) =>{
+        //read file content first
+        fs.readFile(filePath, (error, fileContent) => {
             let wishes = [];
 
             if(!error){
-                wishes = JSON.parse(fileContent)
+                wishes = JSON.parse(fileContent);
             }
             else {
                 console.log(error);
             }
 
-            wishes.push(this);
+            wishes.push(this); //newWish.saveWish();
 
-            fs.writeFile(filepath, JSON.stringify(wishes), (error) => {
+            fs.writeFile(filePath, JSON.stringify(wishes), (error) =>{
                 if(!error){
-                    console.log('wish saved');
+                    console.log('Wish saved.');
                 }
             });
+
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    deleteWish(description){
+        fs.readFile(filePath, (error, fileContent) => {
+            let wishes = [];
+            if (!error) {
+                wishes = JSON.parse(fileContent);
+            }
+
+            for(let i = 0; i < wishes.length; i++) {
+                if(wishes[i] )
+            }
+        })
+    }
+
 }

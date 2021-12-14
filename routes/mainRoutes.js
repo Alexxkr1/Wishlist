@@ -1,26 +1,13 @@
 const express = require('express');
-const date = require('../getDate.js')
+const mainController = require('../controllers/mainController');
 const router = express.Router();
 
+router.get('/', mainController.getMainPage);
 
-router.get('/', (request, response) =>{
-    response.render('index');
-})
+router.get('/getdate', mainController.getDate);
 
-router.get('/getdate',(request, response) => {
-    let today = date.getDate();
-    response.send(today)
-})
+router.get('/weekday', mainController.getWeekday);
 
-router.get('/getdate',(request, response) => {
-    let today = date.getDate();
-    response.send(today)
-})
-
-router.get('/weekday',(request, response) => {
-    let weekday = date.getWeekDay();
-    response.send(weekday)
-})
-
+router.post('/', mainController.postWish);
 
 module.exports = router;

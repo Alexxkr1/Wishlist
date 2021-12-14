@@ -1,24 +1,27 @@
-const Wish = require('../getWish')
-const date = require('../getDate');
+const date = require('../getDate.js');
+const Wish = require('../models/wish');
 
-exports.getMainPage = (request, response) => {
+exports.getMainPage = (request, response)=>{
     let today = date.getDate();
-    response.render('index', ) 
+
+    response.render('index', {dateToRender: today});
 }
 
-exports-date.GetDate = (req, res) => {
-    let weekday = date.GetDate()
+exports.getDate =  (req, res)=> { //req - request, res - response
+    let today = date.getDate();
     res.send(today);
+
 }
 
-exports-date.getWeekDay = (req, res) => {
-    let weekday = date.getWeekDay()
+exports.getWeekday = (req, res) => {
+    let weekday = date.getWeekDay();
     res.send(weekday);
 }
-exports.postWish = (req, res) => {
-    console.log(red.body.userWish);
-    const newWish = new Wish(red.body.userWish)
-    newWish.saveWish();
 
+exports.postWish = (req, res) => {
+    console.log(req.body.userWish);
+    const newWish = new Wish(req.body.userWish);
+    newWish.saveWish();
+    
     res.redirect('/');
 }
